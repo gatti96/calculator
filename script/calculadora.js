@@ -1,32 +1,11 @@
-const main = document.querySelector("main");
-const input = document.getElementById("input");
-const resultInput = document.getElementById("result");
-const allowedKeys = [
-  "(",
-  ")",
-  "/",
-  "*",
-  "-",
-  "+",
-  "9",
-  "8",
-  "7",
-  "6",
-  "5",
-  "4",
-  "3",
-  "2",
-  "1",
-  "0",
-  ".",
-  "%",
-  " ",
-];
+import { calcular, Iniciar, trocarTemas, clear } from "./functions.js";
+import { main, input, resultInput, allowedKeys, copy } from "./variables.js";
 
-window.addEventListener("DOMContentLoaded", function () {
-  //este evento inicio o site com o cursor no input
-  input.focus();
-});
+Iniciar();
+
+trocarTemas();
+
+clear();
 
 //essa função cria função para quando apertar botão no teclado do pc
 input.addEventListener("keydown", function (ev) {
@@ -45,35 +24,6 @@ input.addEventListener("keydown", function (ev) {
   if (ev.key === "Enter") {
     calcular();
   }
-});
-
-function calcular() {
-  resultInput.value = "ERRO";
-  const resultado = eval(input.value);
-  /*o método eval calcula automático o que estiver no input, fazedno qualquer conta */
-  resultInput.value = resultado;
-}
-
-document.getElementById("themeSwitcher").addEventListener("click", function () {
-  //muda tema claro/escuro
-  if (main.dataset.theme === "light") {
-    document.body.style.setProperty("--bg-color", "#000");
-    document.body.style.setProperty("--font-color", "#fff");
-    document.body.style.setProperty("--border-color", "#fff");
-    main.dataset.theme = "dark";
-  } else {
-    document.body.style.setProperty("--bg-color", "#fff");
-    document.body.style.setProperty("--font-color", "#000");
-    document.body.style.setProperty("--border-color", "#000");
-    main.dataset.theme = "light";
-  }
-});
-
-document.getElementById("clear").addEventListener("click", function () {
-  input.value = "";
-  input.focus();
-  resultInput.value = "";
-  copy.innerHTML = "Copiar"; /*este inner muda texto botão */
 });
 
 document.getElementById("clear2").addEventListener("click", function () {
@@ -95,7 +45,6 @@ document.getElementById("equal").addEventListener("click", function () {
 });
 
 //esssa função dee baixo copia o resultado para a area de transferencia
-const copy = document.getElementById("copyToClipboard");
 
 copy.addEventListener("click", function () {
   const copyResult = resultInput.value;
